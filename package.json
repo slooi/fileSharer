@@ -1,0 +1,38 @@
+{
+	"name": "tdos",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"dev": "webpack serve --config public.common.js",
+		"buildp": "webpack --config public.common.js",
+		"host": "nodemon ./dist/server/server.js",
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"auto": "webpack serve --config server.common.js",
+		"watch": "webpack serve --config public.common.js & tsc-watch --onSuccess \"node ./dist/server/server.js\"",
+		"start": "npm-run-all --parallel watch:build watch:server",
+		"watch:build": "webpack serve --config public.common.js",
+		"watch:server": "tsc-watch --onSuccess \"node ./dist/server/server.js\""
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/express": "^4.17.9",
+		"@types/node": "^14.14.10",
+		"@types/ws": "^7.4.0",
+		"css-loader": "^5.0.1",
+		"html-webpack-plugin": "^4.5.0",
+		"npm-run-all": "^4.1.5",
+		"style-loader": "^2.0.0",
+		"ts-loader": "^8.0.11",
+		"tsc-watch": "^4.2.9",
+		"typescript": "^4.1.2",
+		"webpack": "^5.10.0",
+		"webpack-cli": "^4.2.0",
+		"webpack-dev-server": "^3.11.0"
+	},
+	"dependencies": {
+		"express": "^4.17.1",
+		"ws": "^7.4.1"
+	},
+	"description": ""
+}
