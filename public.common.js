@@ -8,6 +8,11 @@ module.exports = {
 		port: 8080,
 		hot: true,
 		open: true,
+		proxy: {
+			"/": {
+				target: "http://localhost:8000/",
+			},
+		},
 	},
 	mode: "development",
 	entry: path.resolve(__dirname, "src", "public", "index.ts"),
