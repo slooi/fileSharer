@@ -52,17 +52,43 @@ app.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, func
         return [2 /*return*/];
     });
 }); });
-app.post("/api/", function (req, res, next) {
+app.post("/api/upload", function (req, res, next) {
     console.log("/api/ hit");
-    var form = formidable({ multiples: true });
-    form.parse(req, function (err, fields, files) {
-        if (err) {
-            console.log("THERE WAS ERROR!");
-            next(err);
-            return;
-        }
-        res.json({ fields: fields, files: files });
-    });
+    var form = new formidable.IncomingForm();
+    // let form: IncomingForm = formidable({ multiples: true });
+    form.parse(req, function (err, fields, files) { return __awaiter(void 0, void 0, void 0, function () {
+        var oldPath, newPath, rawData, err_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    if (err) {
+                        console.log("THERE WAS ERROR!");
+                        next(err);
+                        return [2 /*return*/];
+                    }
+                    oldPath = files.someExpressFiles.path;
+                    newPath = __dirname + "/" + files.someExpressFiles.name;
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, promises_1.default.readFile(oldPath)];
+                case 2:
+                    rawData = _a.sent();
+                    return [4 /*yield*/, promises_1.default.writeFile(newPath, rawData)];
+                case 3:
+                    _a.sent();
+                    // fs.writeFile(__dirname,files)
+                    // console.log(fields)
+                    res.send("Successfully uploaded");
+                    return [3 /*break*/, 5];
+                case 4:
+                    err_1 = _a.sent();
+                    console.log("You've got an error!");
+                    return [3 /*break*/, 5];
+                case 5: return [2 /*return*/];
+            }
+        });
+    }); });
 });
 app.post("/download/", function (req, res) {
     console.log(req);
@@ -133,7 +159,7 @@ app.post("/download/", function (req, res) {
 // 	}
 // });
 var getFileName = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var files, err_1;
+    var files, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -145,8 +171,8 @@ var getFileName = function () { return __awaiter(void 0, void 0, void 0, functio
                     throw new Error("no files");
                 return [2 /*return*/, files[0]];
             case 2:
-                err_1 = _a.sent();
-                throw new Error(err_1);
+                err_2 = _a.sent();
+                throw new Error(err_2);
             case 3: return [2 /*return*/];
         }
     });

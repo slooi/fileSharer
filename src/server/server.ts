@@ -12,17 +12,31 @@ app.get("/", async (req, res) => {
 	res.sendFile(path.resolve(__dirname, "..", "public", "index.html"));
 });
 
-app.post("/api/", (req, res, next) => {
+app.post("/api/upload", (req, res, next) => {
 	console.log("/api/ hit");
 
-	let form: IncomingForm = formidable({ multiples: true });
-	form.parse(req, (err: any, fields: Fields, files: Files) => {
+	const form: IncomingForm = new formidable.IncomingForm();
+	// let form: IncomingForm = formidable({ multiples: true });
+	form.parse(req, async (err: any, fields: Fields, files: Files) => {
 		if (err) {
 			console.log("THERE WAS ERROR!");
 			next(err);
 			return;
 		}
-		res.json({ fields, files });
+
+		const oldPath: string = files.someExpressFiles.path;
+		const newPath: string = __dirname + "/" + files.someExpressFiles.name;
+
+		try {
+			// raw data
+			const rawData = await fs.readFile(oldPath);
+			await fs.writeFile(newPath, rawData);
+			// fs.writeFile(__dirname,files)
+			// console.log(fields)
+			res.send("Successfully uploaded");
+		} catch (err) {
+			console.log("You've got an error!");
+		}
 	});
 });
 
