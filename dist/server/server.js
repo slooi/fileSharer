@@ -42,7 +42,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var path_1 = __importDefault(require("path"));
 var promises_1 = __importDefault(require("fs/promises"));
-// import * as formidable from "formidable";
 var formidable = require("formidable");
 var PORT = 8000;
 var app = express_1.default();
@@ -54,35 +53,16 @@ app.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); });
 app.post("/api/", function (req, res, next) {
-    console.log("uploads");
-    console.log("uploads");
-    console.log("uploads");
-    var form;
-    try {
-        form = formidable({ multiples: false });
-    }
-    catch (err) {
-        console.log("11111111111111111111111111111111111111111");
-        console.log(err);
-    }
-    // const form = formidable({ multiples: true });
-    // const form = formidable;
-    try {
-        console.log("parsing!");
-        form.parse(req, function (err, fields, files) {
-            if (err) {
-                console.log("THERE WAS ERROR!");
-                next(err);
-                return;
-            }
-            console.log("RES JSON!");
-            res.json({ fields: fields, files: files });
-        });
-    }
-    catch (err) {
-        console.log("222222222222222222222222222222222222222");
-        console.log(err);
-    }
+    console.log("/api/ hit");
+    var form = formidable({ multiples: true });
+    form.parse(req, function (err, fields, files) {
+        if (err) {
+            console.log("THERE WAS ERROR!");
+            next(err);
+            return;
+        }
+        res.json({ fields: fields, files: files });
+    });
 });
 app.post("/download/", function (req, res) {
     console.log(req);

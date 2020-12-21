@@ -2,9 +2,8 @@ import ws from "ws";
 import express from "express";
 import path from "path";
 import fs from "fs/promises";
-// import * as formidable from "formidable";
+import { Fields, Files, IncomingForm } from "formidable";
 const formidable = require("formidable");
-
 const PORT = 8000;
 const app = express();
 const resourcePath = path.resolve(__dirname, "..", "..", "resources");
@@ -14,34 +13,17 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/api/", (req, res, next) => {
-	console.log("uploads");
-	console.log("uploads");
-	console.log("uploads");
-	let form;
-	try {
-		form = formidable({ multiples: false });
-	} catch (err) {
-		console.log("11111111111111111111111111111111111111111");
-		console.log(err);
-	}
-	// const form = formidable({ multiples: true });
-	// const form = formidable;
+	console.log("/api/ hit");
 
-	try {
-		console.log("parsing!");
-		form.parse(req, (err: any, fields: any, files: any) => {
-			if (err) {
-				console.log("THERE WAS ERROR!");
-				next(err);
-				return;
-			}
-			console.log("RES JSON!");
-			res.json({ fields, files });
-		});
-	} catch (err) {
-		console.log("222222222222222222222222222222222222222");
-		console.log(err);
-	}
+	let form: IncomingForm = formidable({ multiples: true });
+	form.parse(req, (err: any, fields: Fields, files: Files) => {
+		if (err) {
+			console.log("THERE WAS ERROR!");
+			next(err);
+			return;
+		}
+		res.json({ fields, files });
+	});
 });
 
 app.post("/download/", (req, res) => {
