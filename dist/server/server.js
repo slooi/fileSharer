@@ -8,7 +8,7 @@
 /***/ (() => {
 
 HOST="localhost"
-PORT=7000
+PORT=8000
 
 /***/ }),
 
@@ -21158,7 +21158,7 @@ app.get("/", function (req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); });
 app.post("/api/upload", function (req, res, next) {
-    console.log("/api/ hit");
+    console.log("/api/ NOT hit");
     var form = new formidable.IncomingForm();
     // let form: IncomingForm = formidable({ multiples: true });
     form.parse(req, function (err, fields, files) { return __awaiter(void 0, void 0, void 0, function () {

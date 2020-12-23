@@ -39,10 +39,14 @@ module.exports = {
 	// 			compiler.hooks.afterEmit.tap(
 	// 				"AfterEmitPlugin",
 	// 				(compilation) => {
-	// 					exec("npm run start:server", (err, stdout, stderr) => {
-	// 						if (stdout) process.stdout.write(stdout);
-	// 						if (stderr) process.stdout.write(stderr);
-	// 					});
+	// 					console.log("NPM RUN START:SERVER!");
+	// 					exec(
+	// 						"node ./dist/server/server.js",
+	// 						(err, stdout, stderr) => {
+	// 							if (stdout) process.stdout.write(stdout);
+	// 							if (stderr) process.stdout.write(stderr);
+	// 						}
+	// 					);
 	// 				}
 	// 			);
 	// 		},

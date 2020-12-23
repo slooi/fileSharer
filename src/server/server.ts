@@ -19,7 +19,7 @@ app.get("/", async (req, res) => {
 });
 
 app.post("/api/upload", (req, res, next) => {
-	console.log("/api/ hit");
+	console.log("/api/ NOT hit");
 
 	const form: IncomingForm = new formidable.IncomingForm();
 	// let form: IncomingForm = formidable({ multiples: true });
