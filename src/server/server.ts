@@ -3,8 +3,14 @@ import express from "express";
 import path from "path";
 import fs from "fs/promises";
 import { Fields, Files, IncomingForm } from "formidable";
-const formidable = require("formidable");
-const PORT = 8000;
+import * as formidable from "formidable";
+import * as dotenv from "dotenv";
+import "./../../.env";
+// const dotenv = require("dotenv")
+dotenv.config();
+// const formidable = require("formidable");
+
+const PORT = process.env.PORT;
 const app = express();
 const resourcePath = path.resolve(__dirname, "..", "..", "resources");
 

@@ -1,4 +1,5 @@
 const path = require("path");
+const exec = require("child_process").exec;
 
 module.exports = {
 	watch: true,
@@ -6,19 +7,45 @@ module.exports = {
 	devServer: {
 		hot: true,
 	},
+	devtool: "source-map",
 	mode: "development",
 	entry: path.resolve(__dirname, "src", "server", "server.ts"),
 	output: {
 		path: path.resolve(__dirname, "dist", "server"),
-		filename: "serverBundle.js",
+		filename: "server.js",
 	},
 	module: {
 		rules: [
+			// {
+			// 	test: /\.ts$/,
+			// 	loader: "babel-loader",
+			// 	// use: [""],
+			// },
+			{
+				test: /\.js$/i,
+				use: ["source-map-loader"],
+				enforce: "pre",
+			},
 			{
 				test: /\.ts$/,
 				loader: "ts-loader",
-				exclude: path.resolve(__dirname, "node_modules"),
+				exclude: "/node_modules/",
 			},
 		],
 	},
+	// plugins: [
+	// 	{
+	// 		apply: (compiler) => {
+	// 			compiler.hooks.afterEmit.tap(
+	// 				"AfterEmitPlugin",
+	// 				(compilation) => {
+	// 					exec("npm run start:server", (err, stdout, stderr) => {
+	// 						if (stdout) process.stdout.write(stdout);
+	// 						if (stderr) process.stdout.write(stderr);
+	// 					});
+	// 				}
+	// 			);
+	// 		},
+	// 	},
+	// ],
 };
