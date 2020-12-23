@@ -11,6 +11,6 @@
 /*!*****************************!*\
   !*** ./src/public/index.ts ***!
   \*****************************/
-eval("\r\n\n\n//# sourceURL=webpack://tdos/./src/public/index.ts?");
+eval("\r\ndocument.querySelector(\"form\").addEventListener(\"submit\", function (e) {\r\n    // e.preventDefault();\r\n});\r\n\n\n//# sourceURL=webpack://tdos/./src/public/index.ts?");
 /******/ })()
 ;

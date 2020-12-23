@@ -67,7 +67,7 @@ app.post("/api/upload", function (req, res, next) {
                         return [2 /*return*/];
                     }
                     oldPath = files.someExpressFiles.path;
-                    newPath = __dirname + "/" + files.someExpressFiles.name;
+                    newPath = path_1.default.join(__dirname, files.someExpressFiles.name);
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 4, , 5]);
@@ -77,13 +77,11 @@ app.post("/api/upload", function (req, res, next) {
                     return [4 /*yield*/, promises_1.default.writeFile(newPath, rawData)];
                 case 3:
                     _a.sent();
-                    // fs.writeFile(__dirname,files)
-                    // console.log(fields)
                     res.send("Successfully uploaded");
                     return [3 /*break*/, 5];
                 case 4:
                     err_1 = _a.sent();
-                    console.log("You've got an error!");
+                    res.send(err_1);
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
             }

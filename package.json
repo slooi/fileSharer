@@ -10,7 +10,7 @@
 		"auto": "webpack serve --config server.common.js",
 		"watch": "webpack serve --config public.common.js & tsc-watch --onSuccess \"node ./dist/server/server.js\"",
 		"start": "npm-run-all --parallel watch:build watch:server",
-		"watch:build": "webpack serve --config public.common.js",
+		"watch:build": "webpack serve --host 0.0.0.0 --config public.common.js",
 		"watch:server": "tsc-watch --onSuccess \"node ./dist/server/server.js\""
 	},
 	"author": "",
